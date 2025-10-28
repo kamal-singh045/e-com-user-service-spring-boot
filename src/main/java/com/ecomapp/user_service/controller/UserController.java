@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecomapp.user_service.annotations.AllowedRoles;
 import com.ecomapp.user_service.constant.AppConstants;
+import com.ecomapp.user_service.constant.RoleEnum;
 import com.ecomapp.user_service.dto.ApiResponse;
 import com.ecomapp.user_service.dto.UserDetailResponseDto;
 import com.ecomapp.user_service.service.UserService;
@@ -21,6 +23,7 @@ public class UserController {
     this.userService = userService;
   }
 
+  @AllowedRoles({RoleEnum.ADMIN, RoleEnum.USER})
   @GetMapping("/me")
   public ResponseEntity<ApiResponse<UserDetailResponseDto>> getUserDetails(@RequestHeader(AppConstants.X_USER_ID) String userId) {
     System.out.println("______________X-User-Id______________" + userId);

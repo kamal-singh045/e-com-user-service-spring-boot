@@ -7,6 +7,8 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.ecomapp.user_service.constant.RoleEnum;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -24,9 +26,10 @@ public class JwtUtil {
     this.JWT_EXPIRATION_TIME = JWT_EXPIRATION_TIME;
   }
 
-  public String generateToken(UUID sub) {
+  public String generateToken(UUID sub, RoleEnum role) {
     return Jwts.builder()
         .setSubject(String.valueOf(sub))
+        .claim("role", role.name())
         .setIssuedAt(new Date())
         .setExpiration(new java.util.Date(System.currentTimeMillis() + JWT_EXPIRATION_TIME))
         .signWith(JWT_SECRET_KEY, SignatureAlgorithm.HS256)

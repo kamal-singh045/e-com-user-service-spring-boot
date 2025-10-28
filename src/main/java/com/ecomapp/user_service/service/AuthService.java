@@ -84,7 +84,7 @@ public class AuthService {
           userModel.setIsVerified(true);
           userRepository.save(userModel);
           // generate jwt token
-          String token = jwtUtil.generateToken(userModel.getId());
+          String token = jwtUtil.generateToken(userModel.getId(), userModel.getRole());
           return new ApiResponse<String>(true, "Logged in successfully", token);
         }
         //if invalid then delete the otp and throw error
