@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HealthController {
   @GetMapping("/health")
   public String UserServiceHealth() {
-    String ans = "User service is healthy okay";
+    String ans = "User service is healthy";
     return ans;
   }
 }
